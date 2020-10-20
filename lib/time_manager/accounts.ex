@@ -38,6 +38,7 @@ defmodule Todolist.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
 
+  def get_user_email!(email_), do: Repo.get_by!(User, email: email_)
 
 
   @doc """
