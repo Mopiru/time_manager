@@ -4,7 +4,7 @@ defmodule Todolist.Accounts.Clocks do
 
   schema "clocks" do
     field :status, :boolean, default: false
-    field :time, :time
+    field :time, :naive_datetime
     field :user, :id
 
     timestamps()
@@ -13,7 +13,7 @@ defmodule Todolist.Accounts.Clocks do
   @doc false
   def changeset(clocks, attrs) do
     clocks
-    |> cast(attrs, [:time, :status, :user])
+    |> cast(attrs, [:time, :status,:user])
     |> validate_required([:time, :status, :user])
   end
 end

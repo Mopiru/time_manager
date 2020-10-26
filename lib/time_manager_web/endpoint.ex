@@ -7,7 +7,7 @@ defmodule TodolistWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_time_manager_key",
-    signing_salt: "UEKKXZkd"
+    signing_salt: "mi52sMjS"
   ]
 
   socket "/socket", TodolistWeb.UserSocket,

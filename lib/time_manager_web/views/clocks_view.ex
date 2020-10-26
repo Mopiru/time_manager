@@ -13,6 +13,7 @@ defmodule TodolistWeb.ClocksView do
   def render("clocks.json", %{clocks: clocks}) do
     %{id: clocks.id,
       time: clocks.time,
-      status: clocks.status}
+      status: clocks.status,
+      user: clocks.user}
   end
 end

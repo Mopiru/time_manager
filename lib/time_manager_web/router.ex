@@ -6,6 +6,9 @@ defmodule TodolistWeb.Router do
   end
 
   scope "/api", TodolistWeb do
+    get "/workingtimes/:id/:worktimeID", WorkingtimesController, :showone
+    get "/workingtimes/:userID", WorkingtimesController, :showUser
+    get "/clocks/:userID", ClocksController, :showUserClock
     resources "/users", UserController, except: [:new, :edit]
     resources "/workingtimes", WorkingtimesController, except: [:new, :edit]
     resources "/clocks", ClocksController, except: [:new, :edit]

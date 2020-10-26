@@ -3,6 +3,8 @@ defmodule TodolistWeb.ClocksController do
 
   alias Todolist.Accounts
   alias Todolist.Accounts.Clocks
+  import Ecto.Query
+  alias Todolist.Repo
 
   action_fallback TodolistWeb.FallbackController
 
@@ -10,6 +12,13 @@ defmodule TodolistWeb.ClocksController do
     clocks = Accounts.list_clocks()
     render(conn, "index.json", clocks: clocks)
   end
+
+  # GET WORKING BY USER ID
+  def showUserClock(conn, %{"userID" => id}) do
+    clocks = Repo.all(from(u in Clocks, where: u.user == ^id))
+    render(conn, "index.json", clocks: clocks)
+  end
+
 
   def create(conn, %{"clocks" => clocks_params}) do
     with {:ok, %Clocks{} = clocks} <- Accounts.create_clocks(clocks_params) do

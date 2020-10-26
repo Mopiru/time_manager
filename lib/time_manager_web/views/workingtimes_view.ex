@@ -13,6 +13,7 @@ defmodule TodolistWeb.WorkingtimesView do
   def render("workingtimes.json", %{workingtimes: workingtimes}) do
     %{id: workingtimes.id,
       start: workingtimes.start,
-      end: workingtimes.end}
+      end: workingtimes.end,
+      user: workingtimes.user}
   end
 end

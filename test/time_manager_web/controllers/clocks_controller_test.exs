@@ -6,11 +6,11 @@ defmodule TodolistWeb.ClocksControllerTest do
 
   @create_attrs %{
     status: true,
-    time: ~T[14:00:00]
+    time: ~N[2010-04-17 14:00:00]
   }
   @update_attrs %{
     status: false,
-    time: ~T[15:01:01]
+    time: ~N[2011-05-18 15:01:01]
   }
   @invalid_attrs %{status: nil, time: nil}
 
@@ -40,7 +40,7 @@ defmodule TodolistWeb.ClocksControllerTest do
       assert %{
                "id" => id,
                "status" => true,
-               "time" => "14:00:00"
+               "time" => "2010-04-17T14:00:00"
              } = json_response(conn, 200)["data"]
     end
 
@@ -62,7 +62,7 @@ defmodule TodolistWeb.ClocksControllerTest do
       assert %{
                "id" => id,
                "status" => false,
-               "time" => "15:01:01"
+               "time" => "2011-05-18T15:01:01"
              } = json_response(conn, 200)["data"]
     end
 

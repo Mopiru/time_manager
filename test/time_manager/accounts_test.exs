@@ -128,8 +128,8 @@ defmodule Todolist.AccountsTest do
   describe "clocks" do
     alias Todolist.Accounts.Clocks
 
-    @valid_attrs %{status: true, time: ~T[14:00:00]}
-    @update_attrs %{status: false, time: ~T[15:01:01]}
+    @valid_attrs %{status: true, time: ~N[2010-04-17 14:00:00]}
+    @update_attrs %{status: false, time: ~N[2011-05-18 15:01:01]}
     @invalid_attrs %{status: nil, time: nil}
 
     def clocks_fixture(attrs \\ %{}) do
@@ -154,7 +154,7 @@ defmodule Todolist.AccountsTest do
     test "create_clocks/1 with valid data creates a clocks" do
       assert {:ok, %Clocks{} = clocks} = Accounts.create_clocks(@valid_attrs)
       assert clocks.status == true
-      assert clocks.time == ~T[14:00:00]
+      assert clocks.time == ~N[2010-04-17 14:00:00]
     end
 
     test "create_clocks/1 with invalid data returns error changeset" do
@@ -165,7 +165,7 @@ defmodule Todolist.AccountsTest do
       clocks = clocks_fixture()
       assert {:ok, %Clocks{} = clocks} = Accounts.update_clocks(clocks, @update_attrs)
       assert clocks.status == false
-      assert clocks.time == ~T[15:01:01]
+      assert clocks.time == ~N[2011-05-18 15:01:01]
     end
 
     test "update_clocks/2 with invalid data returns error changeset" do

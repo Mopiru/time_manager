@@ -14,10 +14,10 @@ config :time_manager,
 # Configures the endpoint
 config :time_manager, TodolistWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "5XKEaW8GDWWb0kILz8CjXZK8RhJYAdDELrsGHAQMosGMunyBeHva0WPDMW5PS1zL",
+  secret_key_base: "Vyvr9OQoA80SqRunDg9M78IGxL23HXB0HcJsW8yYnK0OYTrsrDHe4SFir/LeGBXo",
   render_errors: [view: TodolistWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Todolist.PubSub,
-  live_view: [signing_salt: "8za2LpXb"]
+  live_view: [signing_salt: "ZQ6mNg1D"]
 
 # Configures Elixir's Logger
 config :logger, :console,
