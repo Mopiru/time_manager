@@ -30,3 +30,8 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+# Guardian config
+config :time_manager, Todolist.Guardian,
+       issuer: "time_manager",
+       secret_key: "Secret key. Use `mix guardian.gen.secret` to generate one"
