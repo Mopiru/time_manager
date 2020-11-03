@@ -33,7 +33,7 @@ defmodule TodolistWeb.Router do
     options   "/workingtimes/:userID", WorkingtimesController, :nothing
 
     get "/clocks/:userID", ClocksController, :showUserClock
-    ptions   "/clocks/:userID", ClocksController, :nothing
+    options   "/clocks/:userID", ClocksController, :nothing
 
     resources "/users", UserController, except: [:new, :edit]
     options   "/users", UserController, :nothing
