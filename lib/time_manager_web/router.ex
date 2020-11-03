@@ -3,6 +3,7 @@ defmodule TodolistWeb.Router do
   alias TodolistWeb.Guardian
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
   end
 
