@@ -1,19 +1,27 @@
 import axios from 'axios';
+import User from '../models/user';
 
-const API_URL = 'http://127.0.0.1:4000/api/';
+const API_URL = 'http://127.0.0.1:4000/api/users/';
 
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + 'signin', {
-        username: user.username,
+      .post(API_URL + 'sign_in', {
+        email: user.email,
         password: user.password
       })
       .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem('user', JSON.stringify(response.data));
-        }
-        return response.data;
+        console.log("test");
+        let userObj = new User('', user.email, user.password, user.password, '', response.data.jwt)
+
+        return axios.get('http://127.0.0.1:4000/api/v1/users?email='+user.email)
+        .then(resp => {
+          userObj.userId = resp.data.data.id;
+          userObj.username = resp.data.data.username;
+          localStorage.setItem('user', JSON.stringify(userObj));
+          console.log(JSON.stringify(userObj))
+          
+        })
       });
   }
 
@@ -22,10 +30,13 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + 'signup', {
-      username: user.username,
-      email: user.email,
-      password: user.password
+    return axios.post(API_URL + 'sign_up', {
+      user: {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+        password_confirmation: user.password_confirmation
+      }
     });
   }
 }

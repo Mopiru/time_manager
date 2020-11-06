@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     <header class="jumbotron">
-      <WorkingTime/>
+      <WorkingTime />
       <WorkingTimes/>
       <ClockManager/>
+      <ChartManager/>
     </header>
   </div>
 </template>
@@ -13,17 +14,19 @@ import UserService from '../services/user.service';
 import WorkingTime from './WorkingTime.vue'
 import WorkingTimes from './WorkingTimes.vue'
 import ClockManager from './ClockManager.vue'
+import ChartManager from './ChartManager.vue'
 
 export default {
   name: 'User',
   components: {
     WorkingTime,
     WorkingTimes,
-    ClockManager
+    ClockManager,
+    ChartManager
   },
   data() {
     return {
-      content: ''
+      userId: ''
     };
   },
   mounted() {

@@ -40,7 +40,7 @@
             <label for="password">Password</label>
             <input
               v-model="user.password"
-              v-validate="'required|min:6|max:40'"
+              v-validate="'required|min:8|max:40'"
               type="password"
               class="form-control"
               name="password"
@@ -49,6 +49,20 @@
               v-if="submitted && errors.has('password')"
               class="alert-danger"
             >{{errors.first('password')}}</div>
+          </div>
+          <div class="form-group">
+            <label for="password_confirmation">Confirmation Password</label>
+            <input
+              v-model="user.password_confirmation"
+              v-validate="'required|min:8|max:40'"
+              type="password"
+              class="form-control"
+              name="password_confirmation"
+            />
+            <div
+              v-if="submitted && errors.has('password_confirmation')"
+              class="alert-danger"
+            >{{errors.first('password_confirmation')}}</div>
           </div>
           <div class="form-group">
             <button class="btn btn-primary btn-block">Sign Up</button>
@@ -95,7 +109,7 @@ export default {
       this.$validator.validate().then(isValid => {
         if (isValid) {
           this.$store.dispatch('auth/register', this.user).then(
-            data => {
+          data => {
               this.message = data.message;
               this.successful = true;
             },

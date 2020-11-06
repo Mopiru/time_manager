@@ -14,35 +14,35 @@ defmodule TodolistWeb.Router do
   scope "/api", TodolistWeb do
     
     post "/users/sign_in", UserController, :sign_in
-    options   "/users/sign_in", UserController, :nothing
+    options   "/users/sign_in", UserController, :sign_in
    
     post "/users/sign_up", UserController, :sign_up
-    options   "/users/sign_up", UserController, :nothing
+    options   "/users/sign_up", UserController, :sign_up
     pipe_through :api
   end
 
 
 
   scope "/api/v1", TodolistWeb do
-    pipe_through [:api, :jwt_authenticated]
+    pipe_through [:api]
     
     get "/workingtimes/:id/:worktimeID", WorkingtimesController, :showone
-    options   "workingtimes/:id/:worktimeID", WorkingtimesController, :nothing
+    options   "workingtimes/:id/:worktimeID", WorkingtimesController, :workingtimes
     
     get "/workingtimes/:userID", WorkingtimesController, :showUser
-    options   "/workingtimes/:userID", WorkingtimesController, :nothing
+    options   "/workingtimes/:userID", WorkingtimesController, :workingtimes
 
     get "/clocks/:userID", ClocksController, :showUserClock
-    options   "/clocks/:userID", ClocksController, :nothing
+    options   "/clocks/:userID", ClocksController, :clocks
 
     resources "/users", UserController, except: [:new, :edit]
-    options   "/users", UserController, :nothing
+    options   "/users", UserController, :users
 
     resources "/workingtimes", WorkingtimesController, except: [:new, :edit]
-    options   "/workingtimes", WorkingtimesController, :nothing
+    options   "/workingtimes", WorkingtimesController, :workingtimes
 
     resources "/clocks", ClocksController, except: [:new, :edit]
-    options   "/clocks", ClocksController, :nothing
+    options   "/clocks", ClocksController, :clocks
 
   end
 

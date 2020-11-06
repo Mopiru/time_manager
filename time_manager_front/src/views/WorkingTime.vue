@@ -35,51 +35,51 @@ export default {
   methods:{
     async createWorkingTime() {
         if (this.working_button.start != null && this.working_button.end != null) {
-            let request = "http://127.0.0.1:4000/api/v1/workingTimes/:userID?" + 1
-//            let request = `http://127.0.0.1:4000/api/workingTimes/:userID?` + working_button.start + ``
+            let request = "http://127.0.0.1:4000/api/v1/workingtimes/";
 
-            let data =  {"workingTimes": {
+            let data =  {"workingtimes": {
                     "start": moment(this.working_button.start, 'MM/DD/YYYY hh:mm').format(),
                     "end": moment(this.working_button.end, 'MM/DD/YYYY hh:mm').format(),
                     "user": this.working_button.id
                 }
             }
             console.log(data);
-            const res = await axios.post(request, JSON.stringify(data));
+            const res = await axios.post(request,data);
             res.data.json;
         }
     },
     async updateWorkingTime() {
-        let request = "http://127.0.0.1:4000/api/v1/workingTimes/:userID?".concat(this.userId, "/:workingtimeID?", this.working_button.id)
+        let userObj = JSON.parse(localStorage.user);
+        let request = "http://127.0.0.1:4000/api/v1/workingtimes/"+userObj.userId+"/"+this.working_button.id;
         if (this.working_button.start != null && this.working_button.end != null && this.working_button.id >= 1) {
-            let data =  { "workingTimes": {
+            let data =  { "workingimes": {
                 "start": moment(this.working_button.start, 'MM/DD/YYYY hh:mm').format(),
                 "end": moment(this.working_button.end, 'MM/DD/YYYY hh:mm').format(),
                 }
             }
-            const res = await axios.put(request, JSON.stringify(data))
+            const res = await axios.put(request, data)
             res.data.json;
         } else if (this.working_button.start != null && this.working_button.end == null && this.working_button.id != null ) {
-            let data =  { "workingTimes": {
+            let data =  { "workingimes": {
                 "start": moment(this.working_button.start, 'MM/DD/YYYY hh:mm').format(),
                 "end": moment(this.working_button.end, 'MM/DD/YYYY hh:mm').format(),
                 }
             }
-            const res = await axios.put(request, JSON.stringify(data))
+            const res = await axios.put(request, data)
             res.data.json;
         } else if (this.working_button.start == null && this.working_button.end != null && this.working_button.id != null) {
-            let data =  { "workingTimes": {
+            let data =  { "workingimes": {
                 "start": moment(this.working_button.start, 'MM/DD/YYYY hh:mm').format(),
                 "end": moment(this.working_button.end, 'MM/DD/YYYY hh:mm').format(),
                 }
             }
-            const res = await axios.put(request, JSON.stringify(data))
+            const res = await axios.put(request, data)
             res.data.json;
         }
     },
     async deleteWorkingTime() {
         if (this.working_button.id >= 1) {
-            let request = "http://127.0.0.1:4000/api/v1/workingTimes/:userID?".concat(this.userId, "/:workingtimeID?", this.working_button.id)
+            let request = "http://127.0.0.1:4000/api/v1/workingtimes/"+this.working_button.id;
             const res = await axios.delete(request)
             res.data.json;
         }

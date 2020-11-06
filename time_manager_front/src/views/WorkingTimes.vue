@@ -28,7 +28,8 @@ export default {
   props: ['userId'],
   methods:{
     getWorkingTimes() {
-      var request = "http://127.0.0.1:4000/api/v1/workingTimes/:userID?".concat(this.userId)
+      let userObj = JSON.parse(localStorage.user);
+      var request = "http://127.0.0.1:4000/api/v1/workingtimes/"+userObj.userId;
       axios
       .get(request)
       .then((response) => (this.workingtimes = response.data.data));
