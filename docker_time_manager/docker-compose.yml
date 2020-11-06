@@ -1,0 +1,44 @@
+version: "3"
+services:
+  phoenix:
+    build: ./back
+    container_name: azure-back
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: time_manager_dev
+      PGPORT: 5432
+      PGHOST: db
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+    networks:
+      - net-tm
+  db:
+    image: postgres
+    restart: always
+    container_name: azure-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - net-tm
+  node:
+    container_name: azure-front
+    build: front
+    restart: on-failure
+    environment:
+      - NODE_ENV:development
+    ports:
+      - 80:80
+    networks:
+      - net-tm
+networks:
+  net-tm:
+
+volumes:
+  pgdata:
