@@ -44,8 +44,10 @@ export default {
                 }
             }
             console.log(data);
-            const res = await axios.post(request,data);
+            await axios.post(request,data).then((res) => {
             res.data.json;
+            })
+
         }
     },
     async updateWorkingTime() {
@@ -57,31 +59,35 @@ export default {
                 "end": moment(this.working_button.end, 'MM/DD/YYYY hh:mm').format(),
                 }
             }
-            const res = await axios.put(request, data)
+            await axios.put(request,data).then((res) => {
             res.data.json;
+            })
         } else if (this.working_button.start != null && this.working_button.end == null && this.working_button.id != null ) {
             let data =  { "workingimes": {
                 "start": moment(this.working_button.start, 'MM/DD/YYYY hh:mm').format(),
                 "end": moment(this.working_button.end, 'MM/DD/YYYY hh:mm').format(),
                 }
             }
-            const res = await axios.put(request, data)
+            await axios.put(request,data).then((res) => {
             res.data.json;
+            })
         } else if (this.working_button.start == null && this.working_button.end != null && this.working_button.id != null) {
             let data =  { "workingimes": {
                 "start": moment(this.working_button.start, 'MM/DD/YYYY hh:mm').format(),
                 "end": moment(this.working_button.end, 'MM/DD/YYYY hh:mm').format(),
                 }
             }
-            const res = await axios.put(request, data)
+            await axios.put(request,data).then((res) => {
             res.data.json;
+            })
         }
     },
     async deleteWorkingTime() {
         if (this.working_button.id >= 1) {
             let request = "http://127.0.0.1:4000/api/v1/workingtimes/"+this.working_button.id;
-            const res = await axios.delete(request)
+            await axios.delete(request).then((res) => {
             res.data.json;
+            })
         }
     }
   }

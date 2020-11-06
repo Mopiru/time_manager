@@ -43,8 +43,12 @@ export default {
         },
       };
       this.last_clock = data
-      const res = await axios.post(request, data);
-      this.id_clock = res.data.id;
+      await axios.post(request, data).then((resp) => {
+        this.id_clock = resp.data.id;
+      })
+
+
+
       // si rien data.data a test
     },
     async refresh() {
@@ -59,7 +63,7 @@ export default {
           user: userObj.userId
         }
       };
-      const res = await axios.post(request, data);
+      await axios.post(request, data).then(() => {})
 
       let workdata =  {"workingtimes": {
           "start": moment(this.last_clock.time).format(),
@@ -67,8 +71,9 @@ export default {
           "user": userObj.userId
         }
       }
-      await axios.post("http://127.0.0.1:4000/api/v1/workingtimes/", workdata)
-      this.id_clock = res.data.id_clock;
+      await axios.post("http://127.0.0.1:4000/api/v1/workingtimes/", workdata).then((resp)=> {
+        this.id_clock = resp.data.id_clock;
+      })
     },
   },
 };
@@ -102,8 +107,16 @@ export default {
   background-color: white;
 }
 
-.timer-butt:disabled, .start-timer-butt:disabled:hover, .stop-timer-butt:disabled:hover {
-  background-color: antiquewhite;  
+.start-timer-butt:disabled {
+  background-color: seagreen;
+}
+
+.stop-timer-butt:disabled {
+  background-color: red;
+}
+
+.stop-timer-butt:disabled:hover, .start-timer-butt:disabled:hover {
+  cursor: auto;
 }
 
 .start-timer-butt:hover {

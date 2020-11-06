@@ -57,9 +57,9 @@ export default {
 
         
         let userObj = JSON.parse(localStorage.user);
-        const workingtimes = await axios.get("http://127.0.0.1:4000/api/v1/workingtimes/"+userObj.userId)
-        this.info = workingtimes.data.data
-        console.log(workingtimes.data)
+        await axios.get("http://127.0.0.1:4000/api/v1/workingtimes/"+userObj.userId).then((resp)=> {
+            this.info = resp.data.data;
+        })
         console.log(this.info)
         if (this.info.length>0) {
             let i = 0

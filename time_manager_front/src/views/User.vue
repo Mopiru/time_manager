@@ -32,8 +32,10 @@ export default {
                     "username": this.user.username
                 }
             }
-            const res = await axios.get(request);
+            await axios.get(request).then((res) => {
             res.data.json;
+            })
+
     },
     async updateWorkingTime() {
         let request = "http://127.0.0.1:4000/api/v1/users/:userID?".concat(this.userId)
@@ -42,8 +44,9 @@ export default {
                     "username": this.user.username
                 }
             }
-            const res = await axios.get(request);
+            await axios.get(request).then((res) => {
             res.data.json;
+            })
     }
 }
 }
