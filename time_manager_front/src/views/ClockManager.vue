@@ -22,8 +22,11 @@ export default {
   async mounted() {
     let userObj = JSON.parse(localStorage.user);
     let request = "http://127.0.0.1:4000/api/v1/clocks/"+userObj.userId;
-    const response = await axios.get(request);
-    this.last_status = response.data.data[response.data.data.length - 1].status;
+    await axios.get(request)
+    .then((response) => {
+      this.last_status = response.data.data[response.data.data.length - 1].status;
+    });
+
   },
   props: ["userId"],
   methods: {
